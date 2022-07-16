@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import model.User;
+import model.Customer;
+//import model.User;
 import model.customerService;
 
 public class ReportIssue {
@@ -323,7 +324,7 @@ public class ReportIssue {
 			String LastName = Lnameinput.getText(); 
 			String Email =  emailAddressinput.getText();
 			String Contact = contactNumberinput.getText();
-			String Address = Addressinput.getText();
+			String DetailIssue = Addressinput.getText();
 			String Date_of_Issue="";
 			String Status="";
 			String ResponseT="";
@@ -331,7 +332,7 @@ public class ReportIssue {
 			String Who_Responded="";
 			
 			//ID FirstName Last Name, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue
-	//		customerService cust = new customerService(newCustomer(ID, FirstName,LastName,Email, Contact,Address,TypeIssue,DetailIssue),Issue_Type,FirstName,LastName,Email,Contact,Address,Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
+			customerService cust = new customerService(new Customer(ID, FirstName,LastName,Email, Contact,Issue_Type,DetailIssue),Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
 			
 			
 	}

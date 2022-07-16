@@ -300,8 +300,8 @@ public class LoginPage {
 		
 		//Services S = new Services();
 		
-		//new	ReportIssue();
-		new ExistingIssues();
+		 new	ReportIssue();
+		//new ExistingIssues();
 		
 		//new RepresentativePage();
 		
