@@ -19,7 +19,7 @@ public class User {
 		this.lastName = " ";
 	}
 	
-	User(int id, String firstName, String lastName){
+	public User(int id, String firstName, String lastName){
 		super();
 		this.id = id;
 		this.firstName = firstName;

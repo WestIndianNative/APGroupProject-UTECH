@@ -11,6 +11,8 @@ import java.util.Calendar;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
+import crmGUI.ReportIssue;
+
 public class LoginPage {
 	
 	
@@ -300,7 +302,8 @@ public class LoginPage {
 		
 		//Services S = new Services();
 		
-		 new	ReportIssue();
+		
+		new	ReportIssue();
 		//new ExistingIssues();
 		
 		//new RepresentativePage();
