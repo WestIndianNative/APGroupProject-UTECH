@@ -1,34 +1,53 @@
 package model;
 
-
-
-
-public class Technician extends Employee{
-
-	boolean available; 
+public class Technician extends Employee {
 	
-	Technician(){
-		
-		this.id = 0;
-		this.firstName = " ";
-		this.lastName = " ";
-		this.available = true;
-	}
+	private boolean available;
 	
-	Technician(int id, String firstName, String lastName, boolean available){
-		
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	
+	
+	
+
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param employeeNo
+	 * @param available
+	 */
+	public Technician(int id, String firstName, String lastName, String employeeNo, boolean available) {
+		super(id, firstName, lastName, employeeNo);
 		this.available = available;
 	}
-	
-	Technician(Employee employee){
-		
-		id = employee.id;
-		firstName = employee.firstName;
-		lastName = employee.lastName;
-		available = employee.available;
-	}
-}
 
+	public Technician() {
+		super();
+		this.available = false;	
+	}
+
+
+
+	public boolean isAvailable() {
+		return available;
+	}
+
+
+
+
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+
+
+
+
+	@Override
+	public String toString() {
+		return "Technician [available=" + available + ", getEmployeeNo()=" + getEmployeeNo() + ", toString()="
+				+ super.toString() + ", getId()=" + getId() + ", getFirstName()=" + getFirstName() + ", getLastName()="
+				+ getLastName() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
+	}
+
+}

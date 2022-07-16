@@ -11,8 +11,6 @@ import java.util.Calendar;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
-import crmGUI.ReportIssue;
-
 public class LoginPage {
 	
 	
@@ -281,36 +279,13 @@ public class LoginPage {
 
 	public void clearFields()
 	{
-		//jbg.clearSelection();
-		//userIdCredentials.setText("");
+	
 		result = new JLabel();
 		result.setText("");
 		
 	}
 	
 	
-	public static void main(String[] args) {
-		
-		
-	
-		//new LoginPage();
-		
-	//CustomerPage B = new CustomerPage();
-		//new CustomerPage();
-		
-		//TechnicianPage C = new TechnicianPage();
-		
-		//Services S = new Services();
-		
-		
-		new	ReportIssue();
-		//new ExistingIssues();
-		
-		//new RepresentativePage();
-		
-		//new LiveChat();
-		
-	}
 	
 	
 }

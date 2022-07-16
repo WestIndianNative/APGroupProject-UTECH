@@ -1,63 +1,77 @@
 package model;
 
-/**
- * The User Class is the Base Class for Technician, Customer 
- * and the Representative.
- */
+import javax.persistence.Embeddable;
+
+@Embeddable
 public class User {
 	
-	int id;
-	String firstName;
-	String lastName;
 	
-	//Constructors
+	private int Id;
+	protected String firstName;
+	private String lastName;
 	
-	User(){
+	
+
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 */
+	public User(int id, String firstName, String lastName) {
 		super();
-		this.id = 0;
-		this.firstName = " ";
-		this.lastName = " ";
-	}
-	
-	public User(int id, String firstName, String lastName){
-		super();
-		this.id = id;
+		Id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
-	User(User user){
-		
-		id = user.id;
-		firstName = user.firstName;
-		lastName = user.lastName;
+
+
+
+	public User() {
+		super();
+		Id = 0;
+		this.firstName = "";
+		this.lastName = "";
 	}
 
-	//Getters and Setters
-	
 	public int getId() {
-		return id;
+		return Id;
 	}
+
 
 	public void setId(int id) {
-		this.id = id;
+		Id = id;
 	}
+
 
 	public String getFirstName() {
 		return firstName;
 	}
 
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 
 	public String getLastName() {
 		return lastName;
 	}
 
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+
+	@Override
+	public String toString() {
+		return "User [Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+
+	
+	
+	
+	
 	
 	
 
