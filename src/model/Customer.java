@@ -1,99 +1,76 @@
 package model;
 
+import javax.persistence.*;
+
+@Embeddable
+public class Customer extends User {
+	
+	
+	private String emailAddress;
+
+	private String contactNo;
+	
+	
+	
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param contactNo
+	 */
+	public Customer(int id, String firstName, String lastName, String emailAddress, String contactNo) {
+		super(id, firstName, lastName);
+		this.emailAddress = emailAddress;
+		this.contactNo = contactNo;
+	}
+
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param emailAddress
+	 * @param contactNo
+	 */
 
 
-public class Customer extends User{
-	
-	private String email;
-	private	String phoneNumber;
-	private String TypeIssue;
-	private String DetailIssue;
-	private String Address;
-	
 
-	private User customer;
-	
-	
-	
-	Customer(){
+
+	public Customer() {
 		super();
-		this.id = 0;
-		this.firstName = " ";
-		this.lastName = " ";
-		this.email = " ";
-		this.phoneNumber = " ";
-		this.TypeIssue = " ";
-		this.DetailIssue = " ";
-		this.Address = "";
-	}
-	
-	public Customer(User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue){
-		super();
-		this.email = email;
-		this.phoneNumber = phoneNumber;
-		this.TypeIssue = TypeIssue;
-		this.DetailIssue = DetailIssue;
-		this.Address = Address;
-		
-	}
-	
-	public Customer(Customer customer){
-		
-		id = customer.id;
-		firstName = customer.firstName;
-		lastName = customer.lastName;
-		email = customer.email;
-		phoneNumber = customer.phoneNumber;
-		TypeIssue = customer.TypeIssue;
-		DetailIssue = customer.DetailIssue;
-		
-	}
-	
-	public String getAddress() {
-		return Address;
+		this.emailAddress = "";
+		this.contactNo = "";
 	}
 
-	public void setAddress(String address) {
-		Address = address;
+	public String getEmailAddress() {
+		return emailAddress;
 	}
 
-	public String getEmail() {
-		return email;
+
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+
+
+	public String getContactNo() {
+		return contactNo;
 	}
 
-	public String getPhoneNumber() {
-		return phoneNumber;
+
+
+	public void setContactNo(String contactNo) {
+		this.contactNo = contactNo;
 	}
 
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	
-	public String getTypeIssue() {
-		return TypeIssue;
-	}
-	
-	public void setTypeIssue(String TypeIssue) {
-		this.TypeIssue = TypeIssue;
-	}
-	
-	public String getDetailIssue() {
-		return DetailIssue;
-	}
-	
-	public void setDateIssue(String DetailIssue) {
-		this.DetailIssue = DetailIssue;
-	}
+
 
 	@Override
 	public String toString() {
-		return "Customer [email=" + email + ", phoneNumber=" + phoneNumber + ", TypeIssue=" + TypeIssue
-				+ ", DetailIssue=" + DetailIssue + ", Address=" + Address + ", customer=" + customer + ", id=" + id
-				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+		return "Customer [emailAddress=" + emailAddress + ", contactNo=" + contactNo + ", getId()=" + getId()
+				+ ", getFirstName()=" + getFirstName() + ", getLastName()=" + getLastName() + ", toString()="
+				+ super.toString() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode() + "]";
 	}
 	
 	

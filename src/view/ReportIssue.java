@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 
+import javax.persistence.Column;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -20,10 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
-import model.Customer;
-import model.User;
-//import model.User;
-import model.customerService;
+import model.*;
 
 public class ReportIssue {
 
@@ -54,15 +52,15 @@ public class ReportIssue {
 	private JTextField Lnameinput;
 	private JTextField emailAddressinput;
 	private JTextField contactNumberinput;
-	private JTextField Addressinput;
-	//private Customer newCustomer;
+	private JTextField reportDetails;
 	
 	private JLabel serviceLabel;
 	private JComboBox sericeList;
 	private String SL[]
 	        = { "", "No Internet Connection","Intermittent Internet Service","No Cable","Missing Channels", "No Dial Tone","No Mobile Signal" };
 	
-
+	
+	
 
 	public ReportIssue() {
 		
@@ -70,6 +68,7 @@ public class ReportIssue {
 		initializeComponents();
 	
 	}
+		
 		
 	
 	
@@ -210,11 +209,11 @@ public class ReportIssue {
 		  DetailsOfIssue.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
 		  Page.getContentPane().add(DetailsOfIssue);
 		  
-		  Addressinput = new JTextField();
-		  Addressinput.setBounds(180,300, 200, 40);
-		  Addressinput.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-		  Addressinput.setBorder(new LineBorder(custom_Color,1));
-		  Page.getContentPane().add(Addressinput);
+		  reportDetails = new JTextField();
+		  reportDetails.setBounds(180,300, 200, 40);
+		  reportDetails.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+		  reportDetails.setBorder(new LineBorder(custom_Color,1));
+		  Page.getContentPane().add(reportDetails);
 		  
 		  
 		  submit = new JButton("Submit");
@@ -307,38 +306,6 @@ public class ReportIssue {
 			
 	});
 
-	submit.addActionListener(new ActionListener() {
-		
-		@Override
-		public void actionPerformed(ActionEvent event) {
-		//	logger.info("clear button selected");
-			
-			/*int cusServiceID,String firstName,String lastName,String Email, String Contact,String Issue_Type,
-			String Date_of_Issue,String Status,String ResponseT,String lastResponse,String Who_Responed*/
-	
-			int ID = Integer.parseInt(IDinput.getText());
-			String Issue_Type = (String) sericeList.getSelectedItem();
-			String FirstName = Fnameinput.getText(); 
-			String LastName = Lnameinput.getText(); 
-			String Email =  emailAddressinput.getText();
-			String Contact = contactNumberinput.getText();
-			String DetailIssue = Addressinput.getText();
-			String Date_of_Issue="";
-			String Status="";
-			String ResponseT="";
-			String lastResponse="";
-			String Who_Responded="";
-			String Address="";
-			String TechnicianA = "";
-			
-			//ID FirstName Last Name, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue
-			customerService cust = new customerService(new Customer(new User(ID, FirstName,LastName),Email, Address, Contact,Issue_Type,DetailIssue),Date_of_Issue,Status,ResponseT, TechnicianA, lastResponse,Who_Responded);
-			
-			//User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue --  String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
-			
-	}
-			
-	});
 		
 
 	previous.addActionListener(new ActionListener() {
@@ -358,6 +325,56 @@ public class ReportIssue {
 		}
 			
 	});
+	
+	
+	submit.addActionListener(new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent event) {
+		//	logger.info("clear button selected");
+
+			/*int cusServiceID,String firstName,String lastName,String Email, String Contact,String Issue_Type,
+			String Date_of_Issue,String Status,String ResponseT,String lastResponse,String Who_Responed*/
+
+			
+		
+			int ID = Integer.parseInt(IDinput.getText());
+			
+			String Issue_Type = (String) sericeList.getSelectedItem();
+			
+		
+			String FirstName = Fnameinput.getText();
+	
+			String LastName = Lnameinput.getText();
+		
+			String Email =  emailAddressinput.getText();
+
+			String Contact = contactNumberinput.getText();
+			String DetailOfIssue = reportDetails.getText();
+
+
+			System.out.println("Submit button selected line 330 ReportIssuesClass");
+			System.err.println(ID+" "+Issue_Type+" "+FirstName+" "+LastName+" "+Email+" "+Contact+" "+DetailOfIssue);
+
+			/*
+			 * String Date_of_Issue="11./12/2200"; String Status="Resolved"; String
+			 * ResponseT="5 mins"; String lastResponse="3 secs"; String
+			 * Who_Responded="A. Wright"; String Address="NA"; String TechnicianA = "false";
+			 */
+
+			ServiceIssue complaint = new ServiceIssue(ID, FirstName, LastName, Email, Contact, Issue_Type, DetailOfIssue);
+			//int id, String firstName, String lastName, String emailAddress, String contactNo,String issueType, String detailOfIssue
+			
+			JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ", "Hello"+ Fnameinput.getText()+" "+Lnameinput.getText() , JOptionPane.INFORMATION_MESSAGE);
+			complaint.AddReportToDB();
+																																				//String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
+
+			//User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue --  String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
+
+	}
+
+	});
+
 
 		
 	}
@@ -366,7 +383,7 @@ public class ReportIssue {
 	{
 		
 		
-		Addressinput.setText("");
+		reportDetails.setText("");
 		emailAddressinput.setText("");
 		Fnameinput.setText("");
 		Lnameinput.setText("");

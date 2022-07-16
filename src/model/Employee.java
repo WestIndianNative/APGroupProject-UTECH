@@ -1,33 +1,39 @@
 package model;
 
-
-
-public class Employee extends User{
+public class Employee extends User {
 	
-	//Constructors
-	
-	public boolean available;
+	private String employeeNo;
 
-	Employee(){
-		
-		this.id = 0;
-		this.firstName = " ";
-		this.lastName = " ";
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param employeeNo
+	 */
+	public Employee(int id, String firstName, String lastName, String employeeNo) {
+		super(id, firstName, lastName);
+		this.employeeNo = employeeNo;
 	}
 	
-	Employee(int id, String firstName, String lastName){
-		
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Employee() {
+		super();
+		this.employeeNo = "";
+	}
+
+	public String getEmployeeNo() {
+		return employeeNo;
+	}
+
+	public void setEmployeeNo(String employeeNo) {
+		this.employeeNo = employeeNo;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [employeeNo=" + employeeNo + ", getId()=" + getId() + ", getFirstName()=" + getFirstName()
+				+ ", getLastName()=" + getLastName() + ", toString()=" + super.toString() + ", getClass()=" + getClass()
+				+ ", hashCode()=" + hashCode() + "]";
 	}
 	
-	Employee(Employee employee){
-		
-		id = employee.id;
-		firstName = employee.firstName;
-		lastName = employee.lastName;
-	}
+
 }
-
-
