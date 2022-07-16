@@ -18,7 +18,7 @@ import controller.SessionFactoryBuilder;
 
 @Entity
 @Table(name="customerServiceIssue")
-public class customerService{
+public class customerService extends User{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="Customer_No")
@@ -29,8 +29,10 @@ public class customerService{
 	private String lastName;
 	@Column(name="Email")
 	private String Email;
+	
 	@Column(name="Contact")
 	private String Contact;
+	
 	@Column(name="Issue_Type")
 	private String Issue_Type;
 	@Column(name="Date_of_Issue")
@@ -46,6 +48,8 @@ public class customerService{
 	@Column(name="Who_Responed")
 	private String Who_Responed;
 	
+	private Customer customer;
+
 	
 	
 	
@@ -53,14 +57,10 @@ public class customerService{
 	
 
 
-	public customerService()
-	{
-		this.cusServiceID= cusServiceID;
-		this.firstName = firstName;
-		this.lastName= lastName;
-		this.Email= Email;
-		this.Contact = Contact;
-		this.Issue_Type = Issue_Type;
+
+	
+	public customerService(Customer customer, String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed) {
+		super();
 		this.Date_of_Issue = Date_of_Issue;
 		this.Status = Status;
 		this.ResponseT = ResponseT;
@@ -70,24 +70,19 @@ public class customerService{
 		
 	}
 	
-	public customerService(int cusServiceID,String firstName,String lastName,String Email, String Contact,String Issue_Type,
-							String Date_of_Issue,String Status,String ResponseT,String lastResponse,String Who_Responed)
-	{
-		this.cusServiceID = cusServiceID;
-		this.firstName = firstName;
-		this.lastName= lastName;
-		this.Email= Email;
-		this.Contact = Contact;
-		this.Issue_Type = Issue_Type;
-		this.Date_of_Issue = Date_of_Issue;
-		this.Status = Status;
-		this.ResponseT = ResponseT;
-		this.TechnicianA = TechnicianA;
-		this.lastResponse = lastResponse;
-	    this.Who_Responed = Who_Responed;
-		
-	}
-
+	
+	/*
+	 * public customerService(int cusServiceID,String firstName,String
+	 * lastName,String Email, String Contact,String Issue_Type, String
+	 * Date_of_Issue,String Status,String ResponseT,String lastResponse,String
+	 * Who_Responed) { this.cusServiceID = cusServiceID; this.firstName = firstName;
+	 * this.lastName= lastName; this.Email= Email; this.Contact = Contact;
+	 * this.Issue_Type = Issue_Type; this.Date_of_Issue = Date_of_Issue; this.Status
+	 * = Status; this.ResponseT = ResponseT; this.TechnicianA = TechnicianA;
+	 * this.lastResponse = lastResponse; this.Who_Responed = Who_Responed;
+	 * 
+	 * }
+	 */
     
 	
 	

@@ -33,7 +33,7 @@ public class Driver {
 		System.out.print("Data successfully saved");
 		logger.info("Customer Request  Success");*/
 		
-		new ReportIssue();
+		//new ReportIssue();
 		
 	}
 	public static Session getCurrentSessionFromConfig() {

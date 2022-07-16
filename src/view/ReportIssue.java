@@ -20,6 +20,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.Customer;
+import model.User;
+//import model.User;
 import model.customerService;
 
 public class ReportIssue {
@@ -52,25 +55,21 @@ public class ReportIssue {
 	private JTextField emailAddressinput;
 	private JTextField contactNumberinput;
 	private JTextField Addressinput;
+	//private Customer newCustomer;
 	
 	private JLabel serviceLabel;
 	private JComboBox sericeList;
 	private String SL[]
 	        = { "", "No Internet Connection","Intermittent Internet Service","No Cable","Missing Channels", "No Dial Tone","No Mobile Signal" };
 	
-	
-	
+
 
 	public ReportIssue() {
 		
 		
 		initializeComponents();
-		
-		
-		sericeList.getSelectedIndex()
 	
 	}
-		
 		
 	
 	
@@ -323,15 +322,20 @@ public class ReportIssue {
 			String LastName = Lnameinput.getText(); 
 			String Email =  emailAddressinput.getText();
 			String Contact = contactNumberinput.getText();
-			String Address = Addressinput.getText();
+			String DetailIssue = Addressinput.getText();
 			String Date_of_Issue="";
 			String Status="";
 			String ResponseT="";
 			String lastResponse="";
 			String Who_Responded="";
-			customerService cust = new customerService(ID,Issue_Type,FirstName,LastName,Email,Contact,Address,Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
+			String Address="";
+			String TechnicianA = "";
 			
-		
+			//ID FirstName Last Name, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue
+			customerService cust = new customerService(new Customer(new User(ID, FirstName,LastName),Email, Address, Contact,Issue_Type,DetailIssue),Date_of_Issue,Status,ResponseT, TechnicianA, lastResponse,Who_Responded);
+			
+			//User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue --  String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
+			
 	}
 			
 	});
