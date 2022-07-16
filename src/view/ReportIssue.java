@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.customerService;
+
 public class ReportIssue {
 
 	
@@ -303,6 +305,33 @@ public class ReportIssue {
 			
 	});
 
+	submit.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent event) {
+		//	logger.info("clear button selected");
+			
+			/*int cusServiceID,String firstName,String lastName,String Email, String Contact,String Issue_Type,
+			String Date_of_Issue,String Status,String ResponseT,String lastResponse,String Who_Responed*/
+	
+			int ID = Integer.parseInt(IDinput.getText());
+			String Issue_Type = (String) sericeList.getSelectedItem();
+			String FirstName = Fnameinput.getText(); 
+			String LastName = Lnameinput.getText(); 
+			String Email =  emailAddressinput.getText();
+			String Contact = contactNumberinput.getText();
+			String Address = Addressinput.getText();
+			String Date_of_Issue="";
+			String Status="";
+			String ResponseT="";
+			String lastResponse="";
+			String Who_Responded="";
+			customerService cust = new customerService(ID,Issue_Type,FirstName,LastName,Email,Contact,Address,Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
+			
+		
+	}
+			
+	});
 		
 
 	previous.addActionListener(new ActionListener() {
