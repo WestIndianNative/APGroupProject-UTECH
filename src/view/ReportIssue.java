@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
 
+import model.User;
 import model.customerService;
 
 public class ReportIssue {
@@ -52,6 +53,7 @@ public class ReportIssue {
 	private JTextField emailAddressinput;
 	private JTextField contactNumberinput;
 	private JTextField Addressinput;
+	private customerService newCustomer;
 	
 	private JLabel serviceLabel;
 	private JComboBox sericeList;
@@ -66,8 +68,6 @@ public class ReportIssue {
 		
 		initializeComponents();
 		
-		
-		sericeList.getSelectedIndex()
 	
 	}
 		
@@ -329,9 +329,11 @@ public class ReportIssue {
 			String ResponseT="";
 			String lastResponse="";
 			String Who_Responded="";
-			customerService cust = new customerService(ID,Issue_Type,FirstName,LastName,Email,Contact,Address,Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
 			
-		
+			//ID FirstName Last Name, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue
+	//		customerService cust = new customerService(newCustomer(ID, FirstName,LastName,Email, Contact,Address,TypeIssue,DetailIssue),Issue_Type,FirstName,LastName,Email,Contact,Address,Date_of_Issue,Status,ResponseT,lastResponse,Who_Responded);
+			
+			
 	}
 			
 	});

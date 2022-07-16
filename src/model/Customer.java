@@ -4,14 +4,19 @@ package model;
 
 public class Customer extends User{
 	
-	String email;
-	String phoneNumber;
-	String TypeIssue;
-	String DetailIssue;
+	private String email;
+	private	String phoneNumber;
+	private String TypeIssue;
+	private String DetailIssue;
+	private String Address;
+	
+
+	private User customer;
+	
 	
 	
 	Customer(){
-		
+		super();
 		this.id = 0;
 		this.firstName = " ";
 		this.lastName = " ";
@@ -19,21 +24,20 @@ public class Customer extends User{
 		this.phoneNumber = " ";
 		this.TypeIssue = " ";
 		this.DetailIssue = " ";
+		this.Address = "";
 	}
 	
-	Customer(int id, String firstName, String lastName, String email, String phoneNumber, String TypeIssue, String DetailIssue){
-		
-		this.id = id;
-		this.firstName = firstName;
-		this.lastName = lastName;
+	public Customer(User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue){
+		super();
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.TypeIssue = TypeIssue;
 		this.DetailIssue = DetailIssue;
+		this.Address = Address;
 		
 	}
 	
-	Customer(Customer customer){
+	public Customer(Customer customer){
 		
 		id = customer.id;
 		firstName = customer.firstName;
@@ -43,6 +47,14 @@ public class Customer extends User{
 		TypeIssue = customer.TypeIssue;
 		DetailIssue = customer.DetailIssue;
 		
+	}
+	
+	public String getAddress() {
+		return Address;
+	}
+
+	public void setAddress(String address) {
+		Address = address;
 	}
 
 	public String getEmail() {
@@ -76,6 +88,15 @@ public class Customer extends User{
 	public void setDateIssue(String DetailIssue) {
 		this.DetailIssue = DetailIssue;
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [email=" + email + ", phoneNumber=" + phoneNumber + ", TypeIssue=" + TypeIssue
+				+ ", DetailIssue=" + DetailIssue + ", Address=" + Address + ", customer=" + customer + ", id=" + id
+				+ ", firstName=" + firstName + ", lastName=" + lastName + "]";
+	}
+	
+	
 	
 
 }

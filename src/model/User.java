@@ -13,14 +13,14 @@ public class User {
 	//Constructors
 	
 	User(){
-		
+		super();
 		this.id = 0;
 		this.firstName = " ";
 		this.lastName = " ";
 	}
 	
 	User(int id, String firstName, String lastName){
-		
+		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
