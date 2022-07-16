@@ -1,4 +1,4 @@
-package userpackage;
+package model;
 
 /**
  * The User Class is the Base Class for Technician, Customer 

@@ -291,7 +291,7 @@ public class LoginPage {
 		
 		
 	
-		new LoginPage();
+		//new LoginPage();
 		
 	//CustomerPage B = new CustomerPage();
 		//new CustomerPage();
@@ -300,7 +300,7 @@ public class LoginPage {
 		
 		//Services S = new Services();
 		
-		//new	ReportIssue();
+		new	ReportIssue();
 		//new ExistingIssues();
 		
 		//new RepresentativePage();
