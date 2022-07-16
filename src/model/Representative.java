@@ -1,4 +1,4 @@
-package userpackage;
+package model;
 
 
 public class Representative extends Employee{
