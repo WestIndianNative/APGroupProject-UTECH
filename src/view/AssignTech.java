@@ -501,7 +501,7 @@ public class AssignTech extends JPanel {
 		
 			Page.setVisible(false);
 			Page.dispose();
-			new RepresentativePage();
+			new TechnicianPage();
 			
 		}
 			
@@ -512,17 +512,12 @@ public class AssignTech extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent event) {
-		//	logger.info("clear button selected");
-
-			
 		
-		//	int ID = Integer.parseInt(IDinput.getText());
 			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
 			   LocalDateTime now = LocalDateTime.now();  
 			   
 			String techList = (String) TechList.getSelectedItem();
 			String repList = (String) RepList.getSelectedItem();
-		//	String custID = customerIDinput.getText();			
 			String response = ResponseInput.getText();
 			String lastresponseTime = dtf.format(now);
 	
@@ -539,18 +534,22 @@ public class AssignTech extends JPanel {
 			JOptionPane.showMessageDialog(Page, "Your response has been accepted ", "Hello"+ RepList.getSelectedItem(), JOptionPane.INFORMATION_MESSAGE);
 		
 			int result = JOptionPane.showConfirmDialog(Page, "Are the required columns already in the database?.");
-			
+			String ColName = null;
 			if(result == 1) {
 				
+				String count = JOptionPane.showInputDialog(Page, "How many columns are being added to the database?.");
 				
-			
-			
-			try {
-					AddColumns("TechAssignment");
-				}catch (SQLException e1) {
-				
-					e1.printStackTrace();
+					for(int i = 0; i < Integer.parseInt(count); i++) {
+					
+					ColName = JOptionPane.showInputDialog(Page, "Enter column name.");
 				}
+					try {
+						AddColumns(ColName);
+					}catch (SQLException e1) {
+					
+						e1.printStackTrace();
+					}
+				
 			
 			}else if(result ==0) {
 				
@@ -585,9 +584,9 @@ public class AssignTech extends JPanel {
 
 	});
 
-			}
-		
 	}
+		
+}
 	
 
 
