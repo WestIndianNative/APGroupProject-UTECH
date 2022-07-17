@@ -39,11 +39,14 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import model.*;
 
 public class AssignTech extends JPanel {
 
-	
+	 private static final Logger logger = LogManager.getLogger(AssignTech.class);
 
 
 	private JMenuBar menuBar;
@@ -191,6 +194,8 @@ public class AssignTech extends JPanel {
 			DefaultTableModel model = new DefaultTableModel();
 			table.setModel(model);
 			Object[] columnHeading = new Object[10];
+			
+			logger.info("A table to created");
 			columnHeading[0] = "RecordID";
 			columnHeading[1] = "Contact";
 			columnHeading[2] = "ReportDetails";
@@ -232,7 +237,9 @@ public class AssignTech extends JPanel {
 			} catch (Exception e) {
 
 				e.printStackTrace();
-			}
+				logger.warn("A table to created");
+				logger.trace(e);
+				logger.error("A exception occurred in ");
 
 			if (this.table != null) {
 
@@ -466,7 +473,7 @@ public class AssignTech extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent event) {
-		//	logger.info("clear button selected");
+		logger.info("logoutbutton selected");
 
 	
 	
@@ -486,7 +493,7 @@ public class AssignTech extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent event) {
-		//	logger.info("clear button selected");
+			logger.info("previous page button selected");
 
 	
 	
@@ -578,7 +585,7 @@ public class AssignTech extends JPanel {
 
 	});
 
-
+			}
 		
 	}
 	
@@ -648,7 +655,7 @@ public class AssignTech extends JPanel {
 		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
 		 Connection con = DriverManager.getConnection(Url, "root", "");		
 		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Last_ResponseDate = ? WHERE Record_No = ?");
-
+		logger.trace("An update was sent to the customerisssue table from assignTech");
 	
 		pstmt.setString(1, parameter);//First Parameter is update statement ?
 		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
@@ -736,7 +743,8 @@ public class AssignTech extends JPanel {
 
 			sql.printStackTrace();
 		}
-
+			
+		logger.trace("A connection was succefully initialized ");
 		return con;
 	}
 

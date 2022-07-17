@@ -186,6 +186,9 @@ public class TechnicianPage extends JPanel {
 						Page.setVisible(false);
 						Page.dispose();
 						new TechViewIssue();
+						
+						
+					
 					
 				}
 

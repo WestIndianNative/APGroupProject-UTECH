@@ -2,15 +2,19 @@ package model;
 
 import javax.persistence.*;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import controller.SessionFactoryBuilder;
 
+
 @Entity
 @Table(name = "customerIssue")
 public class ServiceIssue extends Customer {
 
+	 private static final Logger logger = LogManager.getLogger(ServiceIssue.class);
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "Record_No")
@@ -97,6 +101,8 @@ public ServiceIssue( int id, String firstName, String lastName, String emailAddr
 
 
 	public void AddReportToDB() {
+		
+		logger.info("A record was added to the data");
 		Session session = SessionFactoryBuilder.getSessionFactory().getCurrentSession();
 		Transaction transaction = session.beginTransaction();
 		session.save(this);

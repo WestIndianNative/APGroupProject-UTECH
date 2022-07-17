@@ -22,9 +22,9 @@ public class Driver {
 	//new CustomerPage();
 		//new TechViewIssue();	
 		//new RepresentativePage();
-	//	new AssignTech();
+		new AssignTech();
 		
-		new TechnicianPage();
+	//	new TechnicianPage();
 		
 	}
 	
