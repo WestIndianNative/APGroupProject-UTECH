@@ -24,7 +24,7 @@ public class Driver {
 		//new RepresentativePage();
 		new AssignTech();
 		
-		//new TechnicianPage();
+	//	new TechnicianPage();
 		
 	}
 	
