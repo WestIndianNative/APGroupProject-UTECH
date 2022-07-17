@@ -21,6 +21,9 @@ import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 
+import model.ServiceIssue;
+import model.ServiceRequest;
+
 public class Services {
 	
 	
@@ -299,6 +302,55 @@ public class Services {
 		}
 			
 	});
+		submit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent event) {
+			//	logger.info("submit button selected");
+
+				int ID = Integer.parseInt(IDinput.getText());
+				
+				String Issue_Type = (String) sericeList.getSelectedItem();
+				
+			
+				String FirstName = Fnameinput.getText();
+		
+				String LastName = Lnameinput.getText();
+			
+				String Email =  emailAddressinput.getText();
+
+				String Contact = contactNumberinput.getText();
+				String Address = Addressinput.getText();
+
+
+				
+				System.err.println(ID+" "+Issue_Type+" "+FirstName+" "+LastName+" "+Email+" "+Contact+" "+Address);
+
+				/*
+				 * String Date_of_Issue="11./12/2200"; String Status="Resolved"; String
+				 * ResponseT="5 mins"; String lastResponse="3 secs"; String
+				 * Who_Responded="A. Wright"; String Address="NA"; String TechnicianA = "false";
+				 */
+
+				ServiceRequest complaint = new ServiceRequest(ID, FirstName, LastName, Email, Contact, Issue_Type, Address);
+				//int id, String firstName, String lastName, String emailAddress, String contactNo,String issueType, String detailOfIssue
+				
+				JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ", "Hello"+ Fnameinput.getText()+" "+Lnameinput.getText() , JOptionPane.INFORMATION_MESSAGE);
+				complaint.AddReportToDB();
+				
+		
+					
+			
+				
+				
+			}
+				
+		});
+			
+
+		
+		
+		
 
 		previous.addActionListener(new ActionListener() {
 			
