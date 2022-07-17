@@ -1,6 +1,8 @@
 package view;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,7 +20,7 @@ import javax.swing.table.*;
 import model.Customer;
 import model.ServiceIssue;
 
-public class ExistingIssues {
+public class ExistingIssues extends JPanel {
 
 	private JMenuBar menuBar;
 	private JMenu menu;
@@ -43,7 +45,7 @@ public class ExistingIssues {
 		/* Frame Attributes */
 		Page = new JFrame();
 		Page.getContentPane().setLayout(null);
-		Page.setResizable(true);
+		Page.setResizable(false);
 		Page.setTitle("Exisiting Issues");
 		Page.setVisible(true);
 		Page.pack();
@@ -76,16 +78,18 @@ public class ExistingIssues {
 		} else if (timeOfDay >= 21 && timeOfDay < 24) {
 			Salutation = "Good Night";
 		}
+		
+		////////////////////////////////////////////////////////////////////////////////////////////
+		//////////////////////////////////// TABLE POPULATION /////////////////////////////////////
+		//////////////////////////////////////////////////////////////////////////////////////////
 
 		TableContainer = new JPanel();
 		TableContainer.setLayout(new BorderLayout());
-		TableContainer.setBounds(0, 100, 570, 300);
+		TableContainer.setBounds(5, 120, 565, 220);
+		TableContainer.setOpaque(true);
 		table = new JTable();
 		jsp = new JScrollPane(table);
-		TableContainer.add(jsp, BorderLayout.CENTER);
-		Page.getContentPane().add(TableContainer, BorderLayout.CENTER);
-
-		Page.getContentPane().add(TableContainer);
+	
 
 		DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
@@ -134,12 +138,42 @@ public class ExistingIssues {
 			table.setFillsViewportHeight(true);
 			table.setShowGrid(true);
 			table.getTableHeader().setBackground(Color.lightGray);
-
+			table.setFillsViewportHeight(true);
 			table.setEnabled(false);
+			table.setPreferredScrollableViewportSize(new Dimension (10,100));
+			table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			table.setOpaque(false);
+			table.getTableHeader().setOpaque(false);
 			table.getTableHeader().setReorderingAllowed(false);
 			table.getTableHeader().setFont(new Font("", Font.PLAIN | Font.BOLD, 12));
-			table.setFont(new Font("", Font.PLAIN, 10));
+			table.setFont(new Font("", Font.PLAIN, 8));
+			table.getColumnModel().getColumn(0).setPreferredWidth(50);
+			table.getColumnModel().getColumn(1).setPreferredWidth(50);
+			table.getColumnModel().getColumn(2).setPreferredWidth(70);
+			table.getColumnModel().getColumn(5).setPreferredWidth(50);
+			table.getColumnModel().getColumn(4).setPreferredWidth(50);
+			
+			table.getTableHeader().setPreferredSize(new Dimension(10, 20));
+			
+			
+			table.setRowHeight(0, 50);
+			table.setRowHeight(1, 50);
+			table.setRowHeight(2, 50);
+			table.setRowHeight(3, 50);
+			table.setRowHeight(4, 50);
+			table.setRowHeight(5, 50);
+			table.setRowHeight(6, 50);
+			table.setRowHeight(7, 50);
+			table.setRowHeight(8, 50);
+			table.setRowHeight(9, 50);
+	      //  table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+			jsp.setVisible(true);
+			TableContainer.add(jsp, BorderLayout.CENTER);
+			Page.getContentPane().add(TableContainer, BorderLayout.CENTER);
 
+		//	Page.getContentPane().add(TableContainer);
+
+			table.setSize(500, 500);
 		}
 
 		/* Frame Buttons */
