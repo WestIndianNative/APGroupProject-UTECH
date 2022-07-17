@@ -202,13 +202,11 @@ public class CustomerPage {
 			//	logger.info("clear button selected");
 
 		
-		
-					
-				//System.out.println("clear button clicked");
-				new ExistingIssues();
+				System.out.println("clear button clicked");
+				
 				CustomerPage.setVisible(false);
 				CustomerPage.dispose();
-					
+				new ExistingIssues();
 				
 				
 			}

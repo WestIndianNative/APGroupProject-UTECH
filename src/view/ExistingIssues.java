@@ -18,7 +18,7 @@ import javax.swing.table.*;
 import model.Customer;
 import model.ServiceIssue;
 
-public class ExistingIssues extends ReportIssue {
+public class ExistingIssues {
 
 	private JMenuBar menuBar;
 	private JMenu menu;

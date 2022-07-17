@@ -82,7 +82,7 @@ public class ReportIssue {
 		Page = new JFrame();
 		Page.getContentPane().setLayout(null);
 		Page.setResizable(false);
-		Page.setTitle("Service Request Page");
+		Page.setTitle("Service Issue Page");
 		Page.setVisible(true);
 		
 		
@@ -333,44 +333,35 @@ public class ReportIssue {
 		public void actionPerformed(ActionEvent event) {
 		//	logger.info("clear button selected");
 
-			/*int cusServiceID,String firstName,String lastName,String Email, String Contact,String Issue_Type,
-			String Date_of_Issue,String Status,String ResponseT,String lastResponse,String Who_Responed*/
-
 			
 		
 			int ID = Integer.parseInt(IDinput.getText());
 			
 			String Issue_Type = (String) sericeList.getSelectedItem();
-			
-		
 			String FirstName = Fnameinput.getText();
-	
 			String LastName = Lnameinput.getText();
-		
 			String Email =  emailAddressinput.getText();
-
 			String Contact = contactNumberinput.getText();
 			String DetailOfIssue = reportDetails.getText();
+			
+			
+			
+			if (sericeList.getSelectedIndex() ==0||IDinput.getText().isBlank() || Issue_Type.isBlank() || FirstName.isBlank() || LastName.isBlank()
+					|| Email.isBlank() || Contact.isBlank() || DetailOfIssue.isBlank()) {
+				JOptionPane.showMessageDialog(Page, "All fields are required before submitting a response", "Error",
+						JOptionPane.INFORMATION_MESSAGE);
+
+			} else {
 
 
 			System.out.println("Submit button selected line 330 ReportIssuesClass");
 			System.err.println(ID+" "+Issue_Type+" "+FirstName+" "+LastName+" "+Email+" "+Contact+" "+DetailOfIssue);
 
-			/*
-			 * String Date_of_Issue="11./12/2200"; String Status="Resolved"; String
-			 * ResponseT="5 mins"; String lastResponse="3 secs"; String
-			 * Who_Responded="A. Wright"; String Address="NA"; String TechnicianA = "false";
-			 */
-
-			ServiceIssue complaint = new ServiceIssue(ID, FirstName, LastName, Email, Contact, Issue_Type, DetailOfIssue);
-			//int id, String firstName, String lastName, String emailAddress, String contactNo,String issueType, String detailOfIssue
-			
+			ServiceIssue complaint = new ServiceIssue(ID, FirstName, LastName, Email, Contact, Issue_Type, DetailOfIssue);	
 			JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ", "Hello"+ Fnameinput.getText()+" "+Lnameinput.getText() , JOptionPane.INFORMATION_MESSAGE);
 			complaint.AddReportToDB();
-																																				//String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
-
-			//User customer, String email, String phoneNumber, String Address, String TypeIssue, String DetailIssue --  String Date_of_Issue, String Status, String ResponseT, String TechnicianA, String lastResponse, String Who_Responed
-
+																																				
+			}
 	}
 
 	});

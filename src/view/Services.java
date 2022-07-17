@@ -18,10 +18,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.JToggleButton;
 import javax.swing.border.LineBorder;
 
-import model.ServiceIssue;
+
 import model.ServiceRequest;
 
 public class Services {
@@ -54,7 +53,7 @@ public class Services {
 	private JTextField Addressinput;
 	
 	private JLabel serviceLabel;
-	private JComboBox sericeList;
+	private JComboBox serviceList;
 	private String SL[]
 	        = { "", "BroadBand","Cable", "Landline","Mobile" };
 	
@@ -128,11 +127,11 @@ public class Services {
 			//CustomerPage.getContentPane().add(menuBar);
 		  	Page.setJMenuBar(menuBar);
 		  
-		  sericeList = new JComboBox(SL);
-		  sericeList.setBounds(180, 100, 100, 20);
-		  sericeList.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-		  sericeList.setBorder(new LineBorder(custom_Color,1));
-		  Page.getContentPane().add(sericeList);
+		  	serviceList = new JComboBox(SL);
+		  	serviceList.setBounds(180, 100, 100, 20);
+		  	serviceList.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+		  	serviceList.setBorder(new LineBorder(custom_Color,1));
+		  Page.getContentPane().add(serviceList);
 	
 		  serviceLabel = new JLabel("Services");
 		  serviceLabel.setBounds(100, 100, 100, 20);
@@ -250,7 +249,7 @@ public class Services {
 		bandContainer.setBounds(0, 0, 580, 70);
 		Page.getContentPane().add(bandContainer);
 		
-		//ImageIcon legal = new ImageIcon("C:\\Users\\brown\\eclipse-workspace\\AP-Project 2022/BaseBand.png", "Logo");
+		ImageIcon legal = new ImageIcon("C:\\Users\\brown\\eclipse-workspace\\AP-Project 2022/BaseBand.png", "Logo");
 				JLabel legalNotice = new JLabel("© 2022 Flow. C&W Communications Plc. All rights reserved. Registered in England and Wales\r\n"
 						, JLabel.CENTER );
 				legalNotice.setBounds(10, 430, 580, 70);
@@ -307,41 +306,40 @@ public class Services {
 			@Override
 			public void actionPerformed(ActionEvent event) {
 			//	logger.info("submit button selected");
-
+				
 				int ID = Integer.parseInt(IDinput.getText());
-				
-				String Issue_Type = (String) sericeList.getSelectedItem();
-				
-			
+				String Issue_Type = (String) serviceList.getSelectedItem();
 				String FirstName = Fnameinput.getText();
-		
 				String LastName = Lnameinput.getText();
-			
 				String Email =  emailAddressinput.getText();
-
 				String Contact = contactNumberinput.getText();
 				String Address = Addressinput.getText();
+				
+				try {
+				if (serviceList.getSelectedIndex() ==0||IDinput.getText().isBlank() || Issue_Type.isBlank() || FirstName.isBlank() || LastName.isBlank()
+						|| Email.isBlank() || Contact.isBlank() || Address.isBlank()) {
+					JOptionPane.showMessageDialog(Page, "All fields are required before submitting a response", "Error",
+							JOptionPane.INFORMATION_MESSAGE);
 
+				} else {
+
+					System.err.println(ID + " " + Issue_Type + " " + FirstName + " " + LastName + " " + Email + " "
+							+ Contact + " " + Address);
 
 				
-				System.err.println(ID+" "+Issue_Type+" "+FirstName+" "+LastName+" "+Email+" "+Contact+" "+Address);
-
-				/*
-				 * String Date_of_Issue="11./12/2200"; String Status="Resolved"; String
-				 * ResponseT="5 mins"; String lastResponse="3 secs"; String
-				 * Who_Responded="A. Wright"; String Address="NA"; String TechnicianA = "false";
-				 */
-
-				ServiceRequest complaint = new ServiceRequest(ID, FirstName, LastName, Email, Contact, Issue_Type, Address);
-				//int id, String firstName, String lastName, String emailAddress, String contactNo,String issueType, String detailOfIssue
+					ServiceRequest complaint = new ServiceRequest(ID, FirstName, LastName, Email, Contact, Issue_Type,
+							Address);
 				
-				JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ", "Hello"+ Fnameinput.getText()+" "+Lnameinput.getText() , JOptionPane.INFORMATION_MESSAGE);
-				complaint.AddReportToDB();
-				
-		
+					JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ",
+							"Hello" + Fnameinput.getText() + " " + Lnameinput.getText(),
+							JOptionPane.INFORMATION_MESSAGE);
+					complaint.AddReportToDB();
+
+				}
+				}catch(NumberFormatException ne){
 					
-			
-				
+					ne.printStackTrace();
+				}
 				
 			}
 				
@@ -385,7 +383,7 @@ public class Services {
 		Lnameinput.setText("");
 		IDinput.setText("");
 		contactNumberinput.setText("");
-		sericeList.setSelectedIndex(0);
+		serviceList.setSelectedIndex(0);
 		
 		JOptionPane.showMessageDialog(Page, "Form succesfully cleared", "Reset", JOptionPane.INFORMATION_MESSAGE);
 	}

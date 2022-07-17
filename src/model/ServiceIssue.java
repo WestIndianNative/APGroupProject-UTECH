@@ -94,14 +94,7 @@ public ServiceIssue( int id, String firstName, String lastName, String emailAddr
 		this.detailOfIssue = detailOfIssue;
 	}
 
-	/*
-	 * @Override public String toString() { return "ServiceIssue [issueType=" +
-	 * issueType + ", detailOfIssue=" + detailOfIssue + ", getEmailAddress()=" +
-	 * getEmailAddress() + ", getContactNo()=" + getContactNo() + ", toString()=" +
-	 * super.toString() + ", getId()=" + getId() + ", getFirstName()=" +
-	 * getFirstName() + ", getLastName()=" + getLastName() + ", getClass()=" +
-	 * getClass() + ", hashCode()=" + hashCode() + "]"; }
-	 */
+
 
 	public void AddReportToDB() {
 		Session session = SessionFactoryBuilder.getSessionFactory().getCurrentSession();
