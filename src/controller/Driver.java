@@ -21,7 +21,8 @@ public class Driver {
 	//new ReportIssue();
 //		new CustomerPage();
 		
-		new RepresentativePage();
+		//new RepresentativePage();
+		new AssignTech();
 		
 	}
 	
