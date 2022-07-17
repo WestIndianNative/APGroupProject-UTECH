@@ -154,7 +154,8 @@ public class ExistingIssues extends JPanel {
 			table.getColumnModel().getColumn(4).setPreferredWidth(50);
 			
 			table.getTableHeader().setPreferredSize(new Dimension(10, 20));
-			
+			table.getTableHeader().setBackground(custom_Color);
+			table.getTableHeader().setForeground(Color.WHITE);
 			
 			table.setRowHeight(0, 50);
 			table.setRowHeight(1, 50);
@@ -166,12 +167,10 @@ public class ExistingIssues extends JPanel {
 			table.setRowHeight(7, 50);
 			table.setRowHeight(8, 50);
 			table.setRowHeight(9, 50);
-	      //  table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 			jsp.setVisible(true);
 			TableContainer.add(jsp, BorderLayout.CENTER);
 			Page.getContentPane().add(TableContainer, BorderLayout.CENTER);
 
-		//	Page.getContentPane().add(TableContainer);
 
 			table.setSize(500, 500);
 		}
