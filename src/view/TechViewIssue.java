@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-import javax.persistence.Column;
 import javax.sql.rowset.CachedRowSet;
 import javax.sql.rowset.RowSetFactory;
 import javax.sql.rowset.RowSetProvider;
@@ -39,9 +38,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
-import model.*;
+import model.Customer;
+import model.ServiceIssue;
 
-public class AssignTech extends JPanel {
+public class TechViewIssue extends JPanel {
 
 	
 
@@ -73,9 +73,9 @@ public class AssignTech extends JPanel {
 	private JTextField Statusinput;
 	private JLabel TechlistLable;
 	
-	private JLabel RepListLabel;
+	private JLabel StatListLabel;
 	private JComboBox TechList;
-	private JComboBox RepList;
+	private JComboBox StatusList;
 	
 	private JTable table;
 	private JScrollPane jsp;
@@ -83,7 +83,8 @@ public class AssignTech extends JPanel {
 	
 	private String TL[]
 	        = { "", "Kevin Johnson","Dane Hyatt","Trever Ried","Wayne Walker", "Tim Duncan","Altea Brown" };
-	
+	private String ST[]
+	        = { "", "Resolved","OutStanding" };
 	private String Who_Responded;
 	private String Last_Response_Date;
 	
@@ -92,7 +93,7 @@ public class AssignTech extends JPanel {
 	 * @param who_Responded
 	 * @param last_Response_Date
 	 */
-	public AssignTech(String who_Responded, String last_Response_Date) {
+	public TechViewIssue(String who_Responded, String last_Response_Date) {
 		super();
 		Who_Responded = who_Responded;
 		Last_Response_Date = last_Response_Date;
@@ -127,7 +128,7 @@ public class AssignTech extends JPanel {
 
 
 
-	public AssignTech() {
+	public TechViewIssue() {
 		
 		
 		initializeComponents();
@@ -147,7 +148,7 @@ public class AssignTech extends JPanel {
 		Page = new JFrame();
 		Page.getContentPane().setLayout(null);
 		Page.setResizable(false);
-		Page.setTitle("Technician Assignment Page");
+		Page.setTitle("Technician Update Page");
 		Page.setVisible(true);
 		
 		
@@ -312,19 +313,19 @@ public class AssignTech extends JPanel {
 		  
 		  
 		  
-		 RepList = new JComboBox(TL);
-		 RepList.setBounds(20, 410, 180, 20);
-		 RepList.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-		 RepList.setBorder(new LineBorder(custom_Color,1));
-		 Page.getContentPane().add(RepList);
+		 StatusList = new JComboBox(ST);
+		 StatusList.setBounds(20, 410, 180, 20);
+		 StatusList.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+		 StatusList.setBorder(new LineBorder(custom_Color,1));
+		 Page.getContentPane().add(StatusList);
 		  
 		  
 		  
-		  RepListLabel = new JLabel("Representatives");
-		  RepListLabel.setBounds(20, 390, 250, 20);
-		  RepListLabel.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+		  StatListLabel = new JLabel("Status");
+		  StatListLabel.setBounds(20, 390, 250, 20);
+		  StatListLabel.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
 		 // RepListLabel.setBorder(new LineBorder(custom_Color,1));
-		 Page.getContentPane().add(RepListLabel);
+		 Page.getContentPane().add(StatListLabel);
 		  
 		  //TechlistLable
 			/*
@@ -514,32 +515,49 @@ public class AssignTech extends JPanel {
 			   LocalDateTime now = LocalDateTime.now();  
 			   
 			String techList = (String) TechList.getSelectedItem();
-			String repList = (String) RepList.getSelectedItem();
-		//	String custID = customerIDinput.getText();			
+			String statList = (String) StatusList.getSelectedItem();
+			String Who_RespondedToThis = ResponseInput.getText();			
 			String response = ResponseInput.getText();
 			String lastresponseTime = dtf.format(now);
 	
 			
 			
-			if (TechList.getSelectedIndex() ==0|| response.isBlank() || RepList.getSelectedIndex() ==0) {
+			if (TechList.getSelectedIndex() ==0|| response.isBlank() || StatusList.getSelectedIndex() ==0||Who_RespondedToThis.isBlank() ) {
 				JOptionPane.showMessageDialog(Page, "All fields are required before submitting a response", "Error",
 						JOptionPane.INFORMATION_MESSAGE);
 
 			} else {
 
+				int feedback = JOptionPane.showConfirmDialog(Page, "Does this issue require a tech visit.");
+				
+				String dateOfVisit ="";
+				
+				if(feedback == 0) {
+					
+					dateOfVisit  = JOptionPane.showInputDialog(Page, "Please enter the proposed date in the format [YYYY/MM/DD].");
+					
+					
+				}else if(feedback ==1) {
+				
+					dateOfVisit = "NA";
+					
+				}
 
-
-			JOptionPane.showMessageDialog(Page, "Your response has been accepted ", "Hello"+ RepList.getSelectedItem(), JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(Page, "Your response has been accepted ", "Hello"+ TechList.getSelectedItem(), JOptionPane.INFORMATION_MESSAGE);
 		
 			int result = JOptionPane.showConfirmDialog(Page, "Are the required columns already in the database?.");
+			String ColName = null;
 			
 			if(result == 1) {
+				String count = JOptionPane.showInputDialog(Page, "How many columns are being added to the database?.");
 				
-				
-			
+				for(int i = 0; i < Integer.parseInt(count); i++) {
+					
+					ColName = JOptionPane.showInputDialog(Page, "Enter column name.");
+				}
 			
 			try {
-					AddColumns("TechAssignment");
+					AddColumns(ColName);
 				}catch (SQLException e1) {
 				
 					e1.printStackTrace();
@@ -555,11 +573,11 @@ public class AssignTech extends JPanel {
 				try {
 					
 					
-					TechAssignment(techList, popUpInput);
-					LastResponseTime(lastresponseTime, popUpInput);
-					responseStatement(response, popUpInput);
-					RepAssignment(repList, popUpInput);
-
+					IssueStatus(statList, popUpInput);
+					ProposedVisitDate(dateOfVisit, popUpInput);
+					PrepareResponse(response, popUpInput);
+					LastResponseTime(lastresponseTime,popUpInput);
+					WhoResponded(Who_RespondedToThis,popUpInput);
 					JOptionPane.showMessageDialog(Page,"Record updated successfully");
 				} catch (SQLException e) {
 					
@@ -588,6 +606,8 @@ public class AssignTech extends JPanel {
 
 	public void AddColumns(String columnName) throws SQLException {
 		
+		System.out.println(columnName);
+		
 		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
 		RowSetFactory factory = RowSetProvider.newFactory();
 	    CachedRowSet rowSet = factory.createCachedRowSet();
@@ -603,8 +623,12 @@ public class AssignTech extends JPanel {
 	    boolean exist = false;
 	    
 	    for(int i=1;i<=columnCount; i++) {
-	    	if(meta.getColumnName(i).equals(columnName));
-	    		exist = true;
+	    	if(meta.getColumnName(i).equals(columnName)) {
+	    		
+	    		System.out.println("in for loop");
+		    	System.out.println(meta.getColumnName(i).equals(columnName));
+		    		exist = true;
+	    	}
 	    	
 	    }
 	
@@ -620,15 +644,13 @@ public class AssignTech extends JPanel {
 		
 		 Connection con = DriverManager.getConnection(Url, "root", "");
 		 Statement stmt = con.createStatement();
-		 String query1 = "ALTER TABLE customerissue ADD Last_ResponseDate varchar(255)";
-		 String query2 = "ALTER TABLE customerissue ADD TechAssignment varchar(255)";
-		 String query3 = "ALTER TABLE customerissue ADD Who_Response varchar(255)";
-		 String query4 = "ALTER TABLE customerissue ADD Response varchar(255)";
+		 String query1 = "ALTER TABLE customerissue ADD Proposed_Visit_Date varchar(255)";
+		 String query2 = "ALTER TABLE customerissue ADD Report_Status varchar(255)";
+		
 		 
 		 stmt.executeUpdate(query1);
 		 stmt.executeUpdate(query2);
-		 stmt.executeUpdate(query3);
-		 stmt.executeUpdate(query4);
+	
 		 
 		 System.out.println("Columns added");
 		 
@@ -636,7 +658,80 @@ public class AssignTech extends JPanel {
 		 
 	}
 	
+	public void WhoResponded(String parameter, String RecordNo) throws SQLException {
+		
+		System.out.println(parameter);
+		
+		System.out.println(RecordNo);
+		
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
+		 Connection con = DriverManager.getConnection(Url, "root", "");		
+		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Who_Response = ? WHERE Record_No = ?");
 
+	
+		pstmt.setString(1, parameter);//First Parameter is update statement ?
+		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
+		pstmt.executeUpdate();
+
+	}
+	
+	public void IssueStatus(String parameter, String RecordNo) throws SQLException {
+		
+		System.out.println(parameter);
+		
+		System.out.println(RecordNo);
+		
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
+		 Connection con = DriverManager.getConnection(Url, "root", "");		
+		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Report_Status = ? WHERE Record_No = ?");
+
+	
+		pstmt.setString(1, parameter);//First Parameter is update statement ?
+		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
+		pstmt.executeUpdate();
+
+	}
+	
+	
+	public void ProposedVisitDate(String parameter, String RecordNo) throws SQLException {
+		
+		System.out.println(parameter);
+		
+		System.out.println(RecordNo);
+		
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
+		 Connection con = DriverManager.getConnection(Url, "root", "");		
+		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Proposed_Visit_Date = ? WHERE Record_No = ?");
+
+	
+		pstmt.setString(1, parameter);//First Parameter is update statement ?
+		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
+		pstmt.executeUpdate();
+	
+	}
+	
+	public void PrepareResponse(String parameter, String RecordNo) throws SQLException {
+		
+		System.out.println(parameter);
+		
+		System.out.println(RecordNo);
+		
+		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
+		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
+		 Connection con = DriverManager.getConnection(Url, "root", "");		
+		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Response = ? WHERE Record_No = ?");
+	//	String techList = (String) TechList.getSelectedItem();
+
+	
+		pstmt.setString(1, parameter);//First Parameter is update statement ?
+		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
+		pstmt.executeUpdate();
+
+	
+	}
 	
 	public void LastResponseTime(String parameter, String RecordNo) throws SQLException {
 		
@@ -648,43 +743,6 @@ public class AssignTech extends JPanel {
 		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
 		 Connection con = DriverManager.getConnection(Url, "root", "");		
 		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Last_ResponseDate = ? WHERE Record_No = ?");
-
-	
-		pstmt.setString(1, parameter);//First Parameter is update statement ?
-		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
-		pstmt.executeUpdate();
-
-	}
-	
-	
-	public void responseStatement(String parameter, String RecordNo) throws SQLException {
-		
-		System.out.println(parameter);
-		
-		System.out.println(RecordNo);
-		
-		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
-		 Connection con = DriverManager.getConnection(Url, "root", "");		
-		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Response = ? WHERE Record_No = ?");
-
-	
-		pstmt.setString(1, parameter);//First Parameter is update statement ?
-		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
-		pstmt.executeUpdate();
-	
-	}
-	
-	public void TechAssignment(String parameter, String RecordNo) throws SQLException {
-		
-		System.out.println(parameter);
-		
-		System.out.println(RecordNo);
-		
-		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
-		 Connection con = DriverManager.getConnection(Url, "root", "");		
-		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET TechAssignment = ? WHERE Record_No = ?");
 	//	String techList = (String) TechList.getSelectedItem();
 
 	
@@ -695,33 +753,14 @@ public class AssignTech extends JPanel {
 	
 	}
 	
-	public void RepAssignment(String parameter, String RecordNo) throws SQLException {
-		
-		System.out.println(parameter);
-		
-		System.out.println(RecordNo);
-		
-		DriverManager.registerDriver(new com.mysql.jdbc.Driver());
-		 String Url = "jdbc:mysql://localhost:3306/FLOWdb";
-		 Connection con = DriverManager.getConnection(Url, "root", "");		
-		PreparedStatement pstmt = con.prepareStatement("UPDATE customerissue SET Who_Response = ? WHERE Record_No = ?");
-		//String techList = (String) TechList.getSelectedItem();
 
-	
-		pstmt.setString(1, parameter);//First Parameter is update statement ?
-		pstmt.setString(2,RecordNo);//Second Parameter is update statement ?
-		pstmt.executeUpdate();
-		
-
-	}
-	
 	public void clearFields()
 	{
 		
 	//	ResponseInput.setText("");
 		//customerIDinput.setText("");
 		TechList.setSelectedIndex(0);
-		RepList.setSelectedIndex(0);
+		StatusList.setSelectedIndex(0);
 		
 		JOptionPane.showMessageDialog(Page, "Form succesfully cleared", "Reset", JOptionPane.INFORMATION_MESSAGE);
 	}

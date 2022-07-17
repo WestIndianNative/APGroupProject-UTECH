@@ -93,7 +93,7 @@ public class ExistingIssues extends JPanel {
 
 		DefaultTableModel model = new DefaultTableModel();
 		table.setModel(model);
-		Object[] columnHeading = new Object[8];
+		Object[] columnHeading = new Object[10];
 		columnHeading[0] = "RecordID";
 		columnHeading[1] = "Contact";
 		columnHeading[2] = "ReportDetails";
@@ -102,17 +102,19 @@ public class ExistingIssues extends JPanel {
 		columnHeading[5] = "Id";
 		columnHeading[6] = "ReportIssue";
 		columnHeading[7] = "Lname";
-
+		columnHeading[8] = "LostResponseDate";
+		columnHeading[9] = "WhoResponded";
+		
 		model.setColumnIdentifiers(columnHeading);
 
-		Object[] rowData = new Object[8];
+		Object[] rowData = new Object[10];
 
 		try {
 
 			System.out.println("Entering Loop");
 			ArrayList<ServiceIssue> SList = getServiceIssueList();
 			ArrayList<Customer> RList = getCustomerList();
-
+			ArrayList<AssignTech> AList = getTechList();
 			for (int i = 0; i < SList.size(); i++) {
 
 				System.out.println("Inside Loop");
@@ -124,6 +126,8 @@ public class ExistingIssues extends JPanel {
 				rowData[5] = RList.get(i).getId();
 				rowData[6] = SList.get(i).getIssueType();
 				rowData[7] = RList.get(i).getLastName();
+				rowData[8] = AList.get(i).getLast_Response_Date();
+				rowData[9] = AList.get(i).getWho_Responded();
 
 				model.addRow(rowData);
 			}
@@ -255,6 +259,7 @@ public class ExistingIssues extends JPanel {
 
 	}
 
+
 	public static Connection getConnection() {
 
 		Connection con = null;
@@ -298,6 +303,36 @@ public class ExistingIssues extends JPanel {
 
 		return dataSet;
 	}
+	
+	
+	public ArrayList<AssignTech> getTechList() {
+
+		ArrayList<AssignTech> dataSet = new ArrayList<AssignTech>();
+		String query = "SELECT * FROM customerIssue";
+		Connection con = getConnection();
+		Statement selectStatement;
+		ResultSet rs;
+
+		try {
+
+			selectStatement = con.createStatement();
+			rs = selectStatement.executeQuery(query);
+			AssignTech report;
+			while (rs.next()) {
+
+				report = new AssignTech(rs.getString("Last_ResponseDate"), rs.getString("Who_Response"));
+				
+				dataSet.add(report);
+			}
+		} catch (SQLException sql) {
+
+			sql.printStackTrace();
+		}
+
+		return dataSet;
+	}
+	
+	
 
 	public ArrayList<Customer> getCustomerList() {
 

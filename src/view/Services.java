@@ -308,7 +308,7 @@ public class Services {
 			//	logger.info("submit button selected");
 				
 				int ID = Integer.parseInt(IDinput.getText());
-				String Issue_Type = (String) serviceList.getSelectedItem();
+				String RequestedService = (String) serviceList.getSelectedItem();
 				String FirstName = Fnameinput.getText();
 				String LastName = Lnameinput.getText();
 				String Email =  emailAddressinput.getText();
@@ -316,18 +316,18 @@ public class Services {
 				String Address = Addressinput.getText();
 				
 				try {
-				if (serviceList.getSelectedIndex() ==0||IDinput.getText().isBlank() || Issue_Type.isBlank() || FirstName.isBlank() || LastName.isBlank()
+				if (serviceList.getSelectedIndex() ==0||IDinput.getText().isBlank() || RequestedService.isBlank() || FirstName.isBlank() || LastName.isBlank()
 						|| Email.isBlank() || Contact.isBlank() || Address.isBlank()) {
 					JOptionPane.showMessageDialog(Page, "All fields are required before submitting a response", "Error",
 							JOptionPane.INFORMATION_MESSAGE);
 
 				} else {
 
-					System.err.println(ID + " " + Issue_Type + " " + FirstName + " " + LastName + " " + Email + " "
+					System.err.println(ID + " " + RequestedService + " " + FirstName + " " + LastName + " " + Email + " "
 							+ Contact + " " + Address);
 
 				
-					ServiceRequest complaint = new ServiceRequest(ID, FirstName, LastName, Email, Contact, Issue_Type,
+					ServiceRequest complaint = new ServiceRequest(ID, FirstName, LastName, Email, Contact, RequestedService,
 							Address);
 				
 					JOptionPane.showMessageDialog(Page, "Your issue has been logged ticket #: ",

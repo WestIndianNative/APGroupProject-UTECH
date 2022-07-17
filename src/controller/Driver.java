@@ -19,10 +19,12 @@ public class Driver {
 		
 		
 	//new ReportIssue();
-//		new CustomerPage();
-		
+	//new CustomerPage();
+		//new TechViewIssue();	
 		//new RepresentativePage();
-		new AssignTech();
+	//	new AssignTech();
+		
+		new TechnicianPage();
 		
 	}
 	

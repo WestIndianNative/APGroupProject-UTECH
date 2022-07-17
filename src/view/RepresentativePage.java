@@ -39,7 +39,7 @@ public class RepresentativePage {
 	
 	private JButton services;
 	private JLabel viewComplaintLabel;
-	private JButton viewComplaints;
+	private JButton assignTech;
 	private JButton liveChat;
 	private ImageIcon logoBand;
 	private JLabel logoContainer;
@@ -167,11 +167,11 @@ public class RepresentativePage {
 			RepresentativePage.getContentPane().add(services);
 				 
 			  
-			viewComplaints = new JButton("Assign Tech");
-			viewComplaints.setOpaque(true);
-			viewComplaints.setBounds(20, 260, 160, 100);
-			viewComplaints.setFont(new Font("", Font.PLAIN |Font.BOLD, 12));
-			RepresentativePage.getContentPane().add(viewComplaints);
+			assignTech = new JButton("Assign Tech");
+			assignTech.setOpaque(true);
+			assignTech.setBounds(20, 260, 160, 100);
+			assignTech.setFont(new Font("", Font.PLAIN |Font.BOLD, 12));
+			RepresentativePage.getContentPane().add(assignTech);
 			
 			liveChat = new JButton("Live Chat");
 			liveChat.setBounds(390, 260, 160, 100);
@@ -238,6 +238,25 @@ public class RepresentativePage {
 		});
 		
 		
+		assignTech.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent event) {
+			//	logger.info("clear button selected");
+
+		
+		
+					
+				//System.out.println("clear button clicked");
+				
+				RepresentativePage.setVisible(false);
+				RepresentativePage.dispose();
+					
+				new AssignTech();
+				
+			}
+				
+		});
 
 		logout.addActionListener(new ActionListener() {
 			

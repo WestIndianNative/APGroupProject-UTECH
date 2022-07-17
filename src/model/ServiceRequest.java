@@ -31,7 +31,7 @@ public class ServiceRequest extends Customer {
 	 private String contactNo;
 	 
 
-	@Column(name = "IssueType")
+	@Column(name = "RequestedService")
 	private String issueType;
 
 	@Column(name = "Address")
