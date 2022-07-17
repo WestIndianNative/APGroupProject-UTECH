@@ -24,11 +24,15 @@ public class RepresentativePage {
 	private JMenu menu;
 	private JMenuItem logout;
 	private JLabel containerLabel;
+	private JLabel StatusLabel;
+	private JLabel IssuesLabel;
 
 	private JFrame RepresentativePage;
-	private JButton resolved;
-	private JButton outstanding;
+	private JButton query;
 	private JComboBox sericeList;
+	
+	private JComboBox queryFilter;
+	private String QF[] = {"","Resolved","Outstanding"};
 	private String SL[]
 	        = { "", "No Internet Connection","Intermittent Internet Service","No Cable","Missing Channels", "No Dial Tone","No Mobile Signal" };
 	
@@ -102,51 +106,75 @@ public class RepresentativePage {
 			//CustomerPage.getContentPane().add(menuBar);
 		  	RepresentativePage.setJMenuBar(menuBar);
 			
-			services = new JButton("View Services");
-			services.setBounds(70, 115, 160, 100);
-			services.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-			RepresentativePage.getContentPane().add(services);
 			
 			viewComplaintLabel = new JLabel("View Complaints");
-			viewComplaintLabel.setBounds(350, 76, 160, 100);
-			viewComplaintLabel.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+			viewComplaintLabel.setBounds(135, 97, 160, 20);
+			viewComplaintLabel.setFont(new Font("Monospaced",Font.BOLD |Font.CENTER_BASELINE, 14));
+			viewComplaintLabel.setBackground(Color.BLACK);
+			viewComplaintLabel.setForeground(custom_Color);
+			viewComplaintLabel.setOpaque(false);
+			viewComplaintLabel.setBorder(new LineBorder(custom_Color,2));
 			RepresentativePage.getContentPane().add(viewComplaintLabel);
 			
+			
+			StatusLabel = new JLabel("Status");
+			StatusLabel.setBounds(175, 80, 160, 100);
+			StatusLabel.setForeground(custom_Color);
+			StatusLabel.setFont(new Font("Monospaced",Font.BOLD |Font.CENTER_BASELINE, 12));
+			RepresentativePage.getContentPane().add(StatusLabel);
+			
+			IssuesLabel = new JLabel("Reported Issues");
+			IssuesLabel.setBounds(307, 80, 160, 100);
+			IssuesLabel.setForeground(custom_Color);
+			IssuesLabel.setFont(new Font("Monospaced",Font.BOLD |Font.CENTER_BASELINE, 12));
+			RepresentativePage.getContentPane().add(IssuesLabel);
+			
+			query = new JButton("Query ");
+			query.setBounds(240, 185, 100, 20);
+			query.setBackground(custom_Color);
+			query.setForeground(Color.ORANGE);
+			//setBounds(int x-coordinate, int y-coordinate, int width, int height
+			query.setFont(new Font("", Font.PLAIN |Font.BOLD, 13));
+			RepresentativePage.getContentPane().add(query);
+			
 			containerLabel = new JLabel("");
-			containerLabel.setBounds(290, 115, 270, 100);
+			containerLabel.setBounds(135,115, 320, 100);
 			containerLabel.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-			containerLabel.setBorder(new LineBorder(Color.lightGray,2));
+			containerLabel.setBorder(new LineBorder(custom_Color,2));
 			RepresentativePage.getContentPane().add(containerLabel);
 			
-			resolved = new JButton("Resolved");
-			resolved.setBounds(300, 140, 120, 40);
-			resolved.setBackground(Color.GREEN);
-			resolved.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-			RepresentativePage.getContentPane().add(resolved);
+		
 			
 			
-			outstanding = new JButton("Oustanding ");
-			outstanding.setBounds(430, 140, 120, 40);
-			outstanding.setBackground(Color.RED);
-			outstanding.setForeground(Color.ORANGE);
-			//setBounds(int x-coordinate, int y-coordinate, int width, int height
-			outstanding.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-			RepresentativePage.getContentPane().add(outstanding);
+			
 			
 			  sericeList = new JComboBox(SL);
-			  sericeList.setBounds(370, 190, 100, 20);
-			  sericeList.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
-			  sericeList.setBorder(new LineBorder(custom_Color,1));
+			  sericeList.setBounds(280, 140, 160, 20);
+			  sericeList.setFont(new Font("", Font.PLAIN |Font.BOLD, 11));
+			  sericeList.setBorder(new LineBorder(Color.BLACK,1));
 			  RepresentativePage.getContentPane().add(sericeList);
 		  
-			
+			  queryFilter = new JComboBox(QF);
+			  queryFilter.setBounds(160, 140, 100, 20);
+			  queryFilter.setFont(new Font("", Font.PLAIN |Font.BOLD, 11));
+			  queryFilter.setBorder(new LineBorder(Color.BLACK,1));
+			  RepresentativePage.getContentPane().add(queryFilter);
+			  
+			  
+			services = new JButton("View Request");
+			services.setBounds(205, 260, 160, 100);
+			services.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
+			RepresentativePage.getContentPane().add(services);
+				 
+			  
 			viewComplaints = new JButton("Assign Tech");
-			viewComplaints.setBounds(70, 240, 160, 100);
+			viewComplaints.setOpaque(true);
+			viewComplaints.setBounds(20, 260, 160, 100);
 			viewComplaints.setFont(new Font("", Font.PLAIN |Font.BOLD, 12));
 			RepresentativePage.getContentPane().add(viewComplaints);
 			
 			liveChat = new JButton("Live Chat");
-			liveChat.setBounds(350, 240, 160, 100);
+			liveChat.setBounds(390, 260, 160, 100);
 			liveChat.setFont(new Font("", Font.PLAIN |Font.BOLD, 14));
 			RepresentativePage.getContentPane().add(liveChat);
 		  
